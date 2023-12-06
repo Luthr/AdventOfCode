@@ -1,4 +1,4 @@
-package day1;
+package tasks.day1;
 
 import java.util.*;
 

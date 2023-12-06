@@ -1,4 +1,4 @@
-package day2;
+package tasks.day2;
 
 import models.CubeGame;
 import java.util.List;
