@@ -5,8 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day3Part1 {
-    //    ArrayList<ArrayList<Integer>> symbolLocationMap = new ArrayList<>();
-    ArrayList<ArrayList<String>> valueLocationMap = new ArrayList<>();
     List<String> inputContent;
 
     public String returnSumOfAllParts(List<String> content) {
@@ -23,7 +21,8 @@ public class Day3Part1 {
         int sumOfAllParts = 0;
 
         for (String line : content) {
-            sumOfAllParts = sumOfAllParts + retrieveValidValues(line, lineCount);
+            int value = retrieveValidValues(line, lineCount);
+            sumOfAllParts = sumOfAllParts + value;
             lineCount++;
         }
         return sumOfAllParts;
@@ -73,20 +72,15 @@ public class Day3Part1 {
         int valueStart = line.indexOf(value);
         int valueEnd = line.indexOf(value) + value.length();
 
+        if (value.equals("9")) {
+            String A = "test";
+        }
+
         String[] currentLine = line.split("");
         List<String> adjacentLines = new ArrayList<>();
 
-        System.out.println(lineCount+1 + " " + value);
-        if (valueStart != 0) {
-            if (!currentLine[valueStart - 1].matches("[.]")) {
-                return true;
-            }
-        }
-
-        if (valueEnd != currentLine.length) {
-            if (!currentLine[valueEnd].matches("[.]")) {
-                return true;
-            }
+        if (verifySideCharacters(currentLine, valueStart, valueEnd)) {
+            return true;
         }
 
         if (lineCount != 0) {
@@ -105,18 +99,38 @@ public class Day3Part1 {
         return false;
     }
 
+    private boolean verifySideCharacters(String[] currentLine, int valueStart, int valueEnd) {
+        if (valueStart != 0) {
+            if (!currentLine[valueStart - 1].contains(".")) {
+                return true;
+            }
+        }
+
+        if (valueEnd != currentLine.length) {
+            if (!currentLine[valueEnd].contains(".")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean verifyLinesAboveAndBelow(List<String> adjacentLines, int valueStart, int valueEnd) {
         if (valueStart == 0) {
             valueStart++;
         }
-//        if (valueEnd == adjacentLines.get(0).length()) {
-//            valueEnd--;
-//        }
+
+        if (valueEnd == adjacentLines.get(0).length()) {
+            valueEnd--;
+        }
+
         for (String adjacentLine : adjacentLines) {
-            if (!adjacentLine.substring(valueStart - 1, valueEnd).matches("[.]")) {
-                return false;
+            String[] line = adjacentLine.substring(valueStart - 1, valueEnd + 1).split("");
+            for (String character : line) {
+                if (!character.matches("\\d+") && !character.contains(".")) {
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
 }
