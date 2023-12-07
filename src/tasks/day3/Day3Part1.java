@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 public class Day3Part1 {
     List<String> inputContent;
+    int valueCount = 0;
+    List<Integer> numbersLocation = new ArrayList<>();
 
     public String returnSumOfAllParts(List<String> content) {
         if (content != null) {
@@ -50,6 +52,7 @@ public class Day3Part1 {
         Matcher matcher = pattern.matcher(line);
 
         while (matcher.find()) {
+            numbersLocation.add(matcher.start());
             numberList.add(matcher.group());
         }
 
@@ -69,12 +72,10 @@ public class Day3Part1 {
     }
 
     private boolean verifyAdjacentCharacters(int lineCount, String line, String value) {
-        int valueStart = line.indexOf(value);
-        int valueEnd = line.indexOf(value) + value.length();
 
-        if (value.equals("9")) {
-            String A = "test";
-        }
+        int valueStart = (numbersLocation.get(valueCount));
+        valueCount++;
+        int valueEnd = valueStart + value.length();
 
         String[] currentLine = line.split("");
         List<String> adjacentLines = new ArrayList<>();
