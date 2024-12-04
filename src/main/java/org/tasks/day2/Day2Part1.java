@@ -31,5 +31,6 @@ public class Day2Part1 {
             }
 
         }
+        return true;
     }
 }
