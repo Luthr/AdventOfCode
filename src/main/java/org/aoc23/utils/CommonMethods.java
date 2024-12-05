@@ -1,4 +1,4 @@
-package org.utils;
+package org.aoc23.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,4 +23,23 @@ public class CommonMethods {
         }
         return null;
     }
+
+    public static String removeAlphabeticCharacters(String line) {
+        return line.replaceAll("[t\s+[A-Za-z]]", "");
+    }
+
+    public static HashMap<String, Character> retrieveNumberToTextMap() {
+        HashMap<String, Character> map = new HashMap<>();
+        map.put("one", '1');
+        map.put("two", '2');
+        map.put("three", '3');
+        map.put("four", '4');
+        map.put("five", '5');
+        map.put("six", '6');
+        map.put("seven", '7');
+        map.put("eight", '8');
+        map.put("nine", '9');
+        return map;
+    }
+
 }

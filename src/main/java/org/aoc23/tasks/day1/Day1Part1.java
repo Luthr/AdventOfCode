@@ -1,6 +1,6 @@
 package org.aoc23.tasks.day1;
 
-import org.utils.CommonMethods;
+import org.aoc23.utils.CommonMethods;
 
 import java.util.List;
 

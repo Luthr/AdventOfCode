@@ -1,7 +1,7 @@
 package org.aoc23.tasks.day2;
 
 import org.aoc23.models.CubeGame;
-import org.utils.CommonMethods;
+import org.aoc23.utils.CommonMethods;
 
 import java.util.ArrayList;
 import java.util.List;

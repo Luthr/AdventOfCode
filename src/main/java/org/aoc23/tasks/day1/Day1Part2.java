@@ -3,7 +3,7 @@ package org.aoc23.tasks.day1;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.utils.CommonMethods.retrieveNumberToTextMap;
+import static org.aoc23.utils.CommonMethods.retrieveNumberToTextMap;
 
 public class Day1Part2 extends Day1Part1 {
 

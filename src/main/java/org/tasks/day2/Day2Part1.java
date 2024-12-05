@@ -1,36 +1,47 @@
 package org.tasks.day2;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class Day2Part1 {
 
+    private boolean increase = false;
+    private int currentLevel;
+    private int previousLevel = 0;
+
     public String returnSafeReportCount(List<String> input) {
         int count = 0;
-        String[] levels = null;
         for (String report : input) {
-            levels = report.split(" ");
-
+            if (verifyReportSafe(report.split(" "))) {
+                count++;
+            }
         }
-        return "";
+        return String.valueOf(count);
     }
 
-    private boolean onlyIncreaseOrDecrease(String[] report) {
-        Iterator<String> levels = Arrays.stream(report).iterator();
-        boolean increaseOrDecrease;
-        int previousLevel = 0;
-
-        while (levels.hasNext()) {
-            if (previousLevel != 0) {
-                if (Math.abs(Integer.parseInt(levels.next()) - previousLevel) <= 3) {
-
+    private boolean verifyReportSafe(String[] levels) {
+        int count = 0;
+        for (String level : levels) {
+            currentLevel = Integer.parseInt(level);
+            if (count != 0) {
+                if (isLevelDifferenceValid()) {
+                    if (count == 1) {
+                        increase = (currentLevel > previousLevel);
+                    } else {
+                        if (increase != (currentLevel > previousLevel)) {
+                            return false;
+                        }
+                    }
                 } else {
                     return false;
                 }
             }
-
+            previousLevel = currentLevel;
+            count++;
         }
         return true;
+    }
+
+    private boolean isLevelDifferenceValid() {
+        return Math.abs(currentLevel - previousLevel) > 0 && Math.abs(currentLevel - previousLevel) < 4;
     }
 }
