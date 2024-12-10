@@ -27,15 +27,11 @@ public class CommonMethods {
     }
 
     public static List<String> findFileSpecificContent(String filepath, String regex) throws IOException {
-        final Pattern pattern = Pattern.compile(regex,  Pattern.MULTILINE);
+        final Pattern pattern = Pattern.compile(regex);
         final Matcher matcher = pattern.matcher(Files.readString(Paths.get(filepath)));
 
-        if (matcher.find()) {
-            return matcher.results()
-                    .map(MatchResult::group)
-                    .toList();
-        } else {
-            throw new IllegalArgumentException("No matching content found in the file");
-        }
+        return matcher.results()
+                .map(MatchResult::group)
+                .toList();
     }
 }

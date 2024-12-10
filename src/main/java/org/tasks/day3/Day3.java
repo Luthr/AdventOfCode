@@ -8,9 +8,8 @@ import java.util.List;
 
 public class Day3 {
 
-    private final String searchRegex = "mul\\([0-9]+,[0-9]+\\)";
-
     public String returnProgramMultiplication(String input) throws IOException {
+        String searchRegex = "mul\\([0-9]+,[0-9]+\\)";
         return calculateProgramMultiplication(CommonMethods.findFileSpecificContent(input, searchRegex));
     }
 
@@ -18,6 +17,7 @@ public class Day3 {
         int totalCalulation = 0;
         for (String calculation : input) {
             List<Integer> numbers = Arrays.stream(calculation.split(","))
+                    .map(s -> s.replaceAll("[^0-9]", ""))
                     .map(Integer::parseInt)
                     .toList();
             totalCalulation = totalCalulation + (numbers.get(0) * numbers.get(1));
