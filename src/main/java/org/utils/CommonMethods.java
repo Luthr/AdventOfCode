@@ -28,10 +28,14 @@ public class CommonMethods {
 
     public static List<String> findFileSpecificContent(String filepath, String regex) throws IOException {
         final Pattern pattern = Pattern.compile(regex);
-        final Matcher matcher = pattern.matcher(Files.readString(Paths.get(filepath)));
+        final Matcher matcher = pattern.matcher(readFullInput(filepath));
 
         return matcher.results()
                 .map(MatchResult::group)
                 .toList();
+    }
+
+    public static String readFullInput(String filepath) throws IOException {
+        return Files.readString(Paths.get(filepath));
     }
 }
